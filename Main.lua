@@ -1,3 +1,15 @@
+local oldCall = function(f, ...)
+    return f(...)
+end
+
+function safeCall(name, f, ...)
+    if type(f) ~= "function" then
+        print("[ERROR] Attempt to call nil value:", name, "=", f)
+        return nil
+    end
+    return f(...)
+end
+
 --[[
 	⣿⣿⣿⣿⣿⣿SIGMA SPY⣿⣿⣿⣿⣿⣿
 	⣿⣿⣯⡉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠁
