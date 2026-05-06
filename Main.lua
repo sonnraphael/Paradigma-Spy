@@ -1,13 +1,92 @@
-local oldCall = function(f, ...)
-    return f(...)
-end
+local _require = require
 
-function safeCall(name, f, ...)
-    if type(f) ~= "function" then
-        print("[ERROR] Attempt to call nil value:", name, "=", f)
+function require(name)
+    local ok, result = pcall(_require, name)
+    if not ok then
+        print("[ERROR][REQUIRE FAILED]:", name)
+        print(result)
         return nil
     end
-    return f(...)
+
+    if result == nil then
+        print("[WARN][REQUIRE NIL]:", name)
+    else
+        print("[OK][REQUIRE]:", name)
+    end
+
+    return result
+end
+
+function safeCall(name, fn, ...)
+    if type(fn) ~= "function" then
+        print("[ERROR][NIL CALL]:", name, "=>", fn)
+        print(debug.traceback())
+        return nil
+    end
+
+    print("[CALL]:", name)
+    return fn(...)
+end
+
+function wrapFunctions(tbl, path)
+    if type(tbl) ~= "table" then return tbl end
+
+    for k, v in pairs(tbl) do
+        local currentPath = path .. "." .. tostring(k)
+
+        if type(v) == "function" then
+            tbl[k] = function(...)
+                print("[FUNC CALL]:", currentPath)
+                return v(...)
+            end
+
+        elseif type(v) == "table" then
+            wrapFunctions(v, currentPath)
+        end
+    end
+
+    return tbl
+end
+
+setmetatable(_G, {
+    __index = function(_, key)
+        print("[WARN][GLOBAL NIL ACCESS]:", key)
+        return nil
+    end
+})
+
+function safeIndex(tbl, key, path)
+    if type(tbl) ~= "table" then
+        print("[ERROR][INDEX NON-TABLE]:", path)
+        return nil
+    end
+
+    local value = tbl[key]
+
+    if value == nil then
+        print("[WARN][NIL FIELD]:", path .. "." .. tostring(key))
+    end
+
+    return value
+end
+
+function requireWrap(name)
+    local mod = require(name)
+
+    if type(mod) == "table" then
+        wrapFunctions(mod, name)
+    end
+
+    return mod
+end
+
+function runSafe(fn)
+    local function errHandler(err)
+        print("[FATAL ERROR]:", err)
+        print(debug.traceback())
+    end
+
+    return xpcall(fn, errHandler)
 end
 
 --[[
