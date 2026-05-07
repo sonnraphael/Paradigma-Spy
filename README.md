@@ -2,8 +2,8 @@
 A complete Remote Spy with an incredible parser that captures Client receives and pushes with Actor support!
 
 ## Notices
-- Sigma Spy will have bugs, please report any bugs by opening an [issue](https://github.com/depthso/Sigma-Spy/issues) on Github
-- If you gave a suggestion, please post it in the [discussions](https://github.com/depthso/Sigma-Spy/discussions)
+- Sigma Spy will have bugs, please report any bugs by opening an [issue]() on Github
+- If you gave a suggestion, please post it in the [discussions]()
 - Please do not use Potassium in games with Actors as Potassium's crude implimentations break
 
 ## Loadstring
@@ -29,11 +29,11 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/depthso/Sigma-Spy/ref
 <table>
 	<tr>
 		<td>
-			<img src="https://github.com/user-attachments/assets/ff4f9de3-a70c-4d5c-a94f-6ba6b58d2534">
+			<img src="">
       Parser output example
 		</td>
     <td width="58%">
-			<img src="https://github.com/user-attachments/assets/df3cc601-0018-46e8-b550-07faf3256dda">
+			<img src="">
       UI preview
 		</td>
 	</tr>
