@@ -5,7 +5,7 @@ type table = {
 }
 
 --// Libraries
-local ParserModule = loadstring(game:HttpGet('https://raw.githubusercontent.com/sonnraphael/SigmaSpyRestored/refs/heads/main/Roblox-Parser/examples/something.luau'))()
+local ParserModule = loadstring(game:HttpGet('https://raw.githubusercontent.com/sonnraphael/Paradigma-Spy/refs/heads/main/Main.luau'))()
 
 --// Parser
 function ParserModule:Import(Name: string)
