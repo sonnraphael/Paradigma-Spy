@@ -9,7 +9,7 @@ A complete Remote Spy with an incredible parser that captures Client receives an
 ## Loadstring
 ```lua
 --// Sigma Spy @depso
-loadstring(game:HttpGet(""), "Sigma Spy")()
+
 ```
 
 ## Features ⚡
